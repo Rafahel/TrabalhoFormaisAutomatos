@@ -17,9 +17,9 @@ def main():
                 novoEstado = automato[i][j]
                 novoEstado = novoEstado.replace(",", "")
                 automato[i][j] = novoEstado
-
-    for elemento in automato:
-        print(elemento)
+    #
+    # for elemento in automato:
+    #     print(elemento)
 
     for i in range(len(automato)):
         for j in range(len(tam)):
