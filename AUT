@@ -1,6 +1,7 @@
--> S A,S S S
-A # B #
+- a b c
+->S A,S S S
+A - B -
 B B,C B B
-C # D #
+C - D -
 D D D D,E
 *E E E E
