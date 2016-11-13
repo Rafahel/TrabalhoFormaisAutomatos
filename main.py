@@ -1,41 +1,52 @@
 
 def main():
-    arquivo = open("aut", "r")
+    arquivo = open("aut3", "r")
     linhas = arquivo.readlines()
     cabecalho = linhas[0]
     linhas.pop(0)
     automato = []
     for elemento in linhas:
         automato.append(elemento.split())
-    tam = automato[0]
-    # print(len(tam))
-    '''
-        Cria uma lista [vetor] com as linhas e colunas do automato eliminando a linha 1 que é os simbolos a serem lidos
-    '''
-    for i in range(len(automato)):
-        for j in range(len(tam)):
-            # print(automato[i][j])
-            if "," in automato[i][j]:
-                novoEstado = automato[i][j]
-                novoEstado = novoEstado.replace(",", "")
-                automato[i][j] = novoEstado
-    novoAutomato = []
-    novoAutomato.append(automato[0])
-    estadosExistentes = []
-    estadosExistentes.append(automato[0][0])
-    # print(novoAutomato)
-    novosEstados = []
-    '''
-        Cria uma lista com os estados existentes
-    '''
-    for i in range(len(automato)):
-        for j in range(len(tam)):
-            # print(automato[i][0])
-            if automato[i][0] not in estadosExistentes:
-                estadosExistentes.append(automato[i][0])
-    # print(estadosExistentes)
+    tam = len(automato[0])
+    automato = eliminaMortos(automato, tam)
+    print("Automato com os estados mortos removidos:")
     for elemento in automato:
         print(elemento)
+
+
+def eliminaInalcancaveis(automato):
+    pass
+
+
+
+def eliminaMortos(automato, tam):
+    flag = 0
+    novoatutomato = []
+    rmEstados = []
+    nEstados = []
+    for elemento in automato:
+        t = len(elemento)
+        estado = elemento[0]
+        for i in range(len(elemento)):
+            if elemento[i] == estado:
+                flag+=1
+                # print(flag)
+        if flag == t:
+            rmEstados.append(estado)
+        flag = 0
+    for x in rmEstados:
+        for i in range(len(automato)):
+            for j in range(len(automato[i])):
+                if automato[i][j] == x:
+                    automato[i][j] = "-"
+                # print(automato[i][j])
+    # for elemento in automato:
+    #     print(elemento)
+    return automato
+
+
+
+
 
 
 
