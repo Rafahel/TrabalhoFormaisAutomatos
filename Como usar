@@ -1,0 +1,18 @@
+O programa foi feito para eliminar estados mortos de um AFD.
+
+Para utilizar crie um arquivo com o nome desejado na mesma pasta do arquivo main.py
+e rode o programa. ele vai pedir para digitar o nome do arquivo desejado, digite o
+nome e aperte enter.
+
+Existem 2 exemplos prontos para serem executados, o aut2 e aut3.
+
+O formato para criação do arquivo tem algumas regras, a primeira é que deve ser um
+AFD, a segunda regra é que a primeira linha é o cabeçalho do automato
+(indicador de simbolos lidos).
+
+
+Infelizmente tentamos fazer o resto mas não conseguimos.
+
+Qualquer problema enviar um email para rafahelmello@gmail.com
+
+Grupo: Fernando Fiorin, Rafahel Mello e Tayrone Carneiro Rockenbach
