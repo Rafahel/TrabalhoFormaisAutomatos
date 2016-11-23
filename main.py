@@ -1,3 +1,4 @@
+from modulos import *
 def main():
     while True:
         nome = input("Nome do arquivo com o AFD: ")
@@ -9,6 +10,7 @@ def main():
             automato = []
             for elemento in linhas:
                 automato.append(elemento.split())
+            # automatoinicial = automato
             automato = eliminaMortos(automato)
             print("Automato com os estados mortos removidos:\n")
             for elemento in cabecalho:
@@ -19,33 +21,43 @@ def main():
                 if elemento[0] != "-":
                     print(elemento)
             print("FIM.")
+            print("\n\n\n __Eliminando estados incalcansaveis__\n")
+            for i in range(len(automato)):
+                newautomato = eliminainalcansaveis(automato)
+            for elemento in cabecalho:
+                print("  " + elemento + "  ", end="")
+            print("")
+            print("______________________________")
+            for elemento in newautomato:
+                if elemento[0] != "-":
+                    print(elemento)
+            try:
+                newautomato = eliminavazio(newautomato)
+                print("\n\n\n    ---  Automato final  ---\n")
+                for i in range(len(automato)):
+                    newautomato = eliminainalcansaveis(automato)
+                for elemento in cabecalho:
+                    print("  " + elemento + "  ", end="")
+                print("")
+                print("______________________________")
+                for elemento in newautomato:
+                    if elemento[0] != "-":
+                        print(elemento)
+            except:
+                print("\n\nNada mais a eliminar.")
             break
         except:
             print("Nome do arquivo ou formato incorreto,"
                   " rode o programa e tente novamente...")
+            break
 
 
 
 
 
-def eliminaMortos(automato):
-    flag = 0
-    rmEstados = []
-    for elemento in automato:
-        t = len(elemento)
-        estado = elemento[0]
-        for i in range(len(elemento)):
-            if elemento[i] == estado:
-                flag += 1
-        if flag == t:
-            rmEstados.append(estado)
-        flag = 0
-    for x in rmEstados:
-        for i in range(len(automato)):
-            for j in range(len(automato[i])):
-                if automato[i][j] == x:
-                    automato[i][j] = "-"
-    return automato
+
+
+
 
 
 if __name__ == '__main__':
