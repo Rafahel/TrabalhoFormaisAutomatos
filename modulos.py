@@ -19,19 +19,6 @@ def eliminainalcansaveis(automato):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 def eliminaMortos(automato):
     flag = 0
     rmEstados = []
@@ -83,3 +70,12 @@ def eliminavazio(automato):
 
 
 
+if __name__ == '__main__':
+    try:
+        arquivo = open("Como usar", "r")
+        texto = arquivo.readlines()
+        for elemento in texto:
+            print(elemento)
+    except:
+        print("Arquivo de ajuda não encontrado!")
+        print("Para rodar o programa compile o arquivo main.")
