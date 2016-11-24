@@ -1,4 +1,6 @@
 from modulos import *
+
+
 def main():
     nome = input("Nome do arquivo com o AFD: ")
     try:
