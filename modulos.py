@@ -1,24 +1,3 @@
-def eliminainalcansaveis(automato):
-    estadosalcansados = []
-    for elemento in automato:
-        for i in range(1, len(elemento)):
-            # print(elemento[i])
-            if elemento[i] != elemento[0] and elemento[i] not in estadosalcansados:
-                if elemento[i] != "-":
-                    estadosalcansados.append(elemento[i])
-    for i in range(len(estadosalcansados)):
-        estadosalcansados.append("*" + estadosalcansados[i])
-    for i in range(1,len(automato)):
-        # print(automato[i][0])
-        if automato[i][0] not in estadosalcansados:
-            automato[i][0] = "-"
-            for k in range(len(automato[i])):
-                automato[i][k] = '-'
-
-    return automato
-
-
-
 def eliminaMortos(automato):
     flag = 0
     rmEstados = []
@@ -39,43 +18,67 @@ def eliminaMortos(automato):
     return automato
 
 
-
 def eliminavazio(automato):
-    contador = 0
-    estadoeliminado = []
-    for elemento in automato:
-
-
-        for i in elemento:
-            if i == "-":
-                contador += 1
-                # print(contador)
-            if contador == 2:
-                # print(elemento[0] + " sera eliminado")
-                estadoeliminado.append(elemento[0])
-                contador = 0
-            elif i != "-":
-                contador = 0
-    # print("lista estados eliminados tamanho : " + format(len(estadoeliminado)) + " =", end="")
-    # print(estadoeliminado)
+    c = 0
     for i in range(len(automato)):
-        for j in range(len(automato[i])):
-            if automato[i][j] == estadoeliminado[0]:
-                automato[i][j] = "-"
-    # for e in automato:
-    #     print(e)
-
-
+        # print(automato[i][0])
+        for j in range(1, len(automato[i])):
+            # print(automato[i][j])
+            if automato[i][j] == '-':
+                c += 1
+            if c == 2:
+                c = 0
+                automato[i][0] = "-"
+    # for elemento in automato:
+    #     print(elemento)
     return automato
 
+
+def eliminainalcansaveis(automato):
+    automatoaux = []
+    alcansados = []
+    for elemento in automato:
+        automatoaux.append(elemento.split())
+    # print(automatoaux)
+    for elemento in automatoaux:
+        for transicao in elemento:
+            # print(transicao)
+            if "->" in elemento[0]:
+                alcansados.append(transicao)
+    if len(alcansados) > 0:
+        alcansados.pop(0)
+    # print(alcansados)
+    for tr in alcansados:
+        for elemento in automatoaux:
+            if tr in elemento[0]:
+                for i in range(1, len(elemento)):
+                    # print(elemento[i])
+                    if elemento[i] not in alcansados:
+                        alcansados.append(elemento[i])
+    alcansados.append(automatoaux[0][0])
+    for i in range(len(alcansados)):
+        alcansados.append("*"+alcansados[i])
+        alcansados.append("->" + alcansados[i])
+        alcansados.append("*->" + alcansados[i])
+    # print(alcansados)
+    for i in range(len(automatoaux)):
+        # print(automatoaux[i][0])
+        if automatoaux[i][0] not in alcansados:
+            automatoaux[i][0] = "-"
+
+    # for elemento in automatoaux:
+    #     if elemento[0] != "-":
+    #         print(elemento)
+    return automatoaux
 
 
 if __name__ == '__main__':
     try:
-        arquivo = open("Como usar", "r")
-        texto = arquivo.readlines()
+        arquivo1 = open("Como usar", "r")
+        texto = arquivo1.readlines()
         for elemento in texto:
             print(elemento)
     except:
         print("Arquivo de ajuda não encontrado!")
         print("Para rodar o programa compile o arquivo main.")
+
