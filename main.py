@@ -25,10 +25,17 @@ def main():
         print("\nRemovendo estados vazios...")
         print("\n\n-----AUTOMATO FINAL-----\n")
         for elemento in cabecalho:
-            print("  " + elemento + "  ", end="")
-        print("")
-        print("______________________________\n")
+            print("  " + elemento, end="")
+        print("\n______________________________\n")
         automato = eliminavazio(automato)
+        automato = eliminanaoexistente(automato)
+        # for i in range(len(automato)):
+        #     if automato[i][0] == "-":
+        #         continue
+        #     else:
+        #         for j in range(len(automato[i])):
+        #             print(automato[i][j], end="  ")
+        #         print("")
         for elemento in automato:
             if elemento[0] != "-":
                 print(elemento)

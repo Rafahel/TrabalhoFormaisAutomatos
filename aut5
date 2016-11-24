@@ -1,4 +1,7 @@
 - a b
-*->A= B C
-B A C
-C C C
+*->A= G B
+B F E
+C C G
+E E A
+F B C
+*G G F

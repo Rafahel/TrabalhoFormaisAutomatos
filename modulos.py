@@ -71,6 +71,23 @@ def eliminainalcansaveis(automato):
     #         print(elemento)
     return automatoaux
 
+def eliminanaoexistente(automato):
+    existe = []
+    for elemento in automato:
+        if elemento[0] != "-":
+            existe.append(elemento[0])
+
+    for i in range(len(existe)):
+        if "*" in existe[i]:
+            existe.append(existe[i].replace("*", ""))
+    print(existe)
+    for i in range(len(automato)):
+        for j in range(len(automato[i])):
+            if automato[i][j] not in existe:
+                automato[i][j] = "-"
+    return automato
+
+
 
 if __name__ == '__main__':
     try:
