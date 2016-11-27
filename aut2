@@ -1,8 +1,10 @@
-Teste de um automato funcional, onde ele chega em todos os estados e não há estados mortos.
+Este é o exemplo b dado na aula, neste caso temos dois estados inalcaçaveis, sendo eles o D e o H que devem ser removidos
 - a b
-*->A G B
+*->A= G B
 B F E
 C C G
+*D A H
 E E A
 F B C
 *G G F
+H H D

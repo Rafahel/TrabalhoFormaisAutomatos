@@ -2,58 +2,49 @@ from modulos import *
 
 
 def main():
-    nome = ""
     while True:
         nome = input("Nome do arquivo com o AFD ou digite ajuda para saber como usar: ")
-        if nome.lower() == "ajuda":
-            arq = open("Como usar", "r")
-            linhas = arq.readlines()
-            print("\n")
-            for linha in linhas:
-                print(linha)
+        try:
+            arquivo = open(nome, "r")
+            linhas = arquivo.readlines()
+            descricao = linhas[0]
+            linhas.pop(0)
+            cabecalho = linhas[0]
+            linhas.pop(0)
+            original = []
+            print("\n\n\n__Eliminando estados incalcançaveis__\n")
+            newautomato = eliminainalcancaveis(linhas)
+            for elemento in linhas:
+                original.append(elemento.split())
+            for elemento in newautomato:
+                if elemento[0] != '-':
+                    print(elemento)
+            automato = eliminaMortos(newautomato)
+            print("\n\n__Automato com os estados mortos removidos__\n")
+            for elemento in cabecalho:
+                print("  " + elemento + "  ", end="")
             print("")
-        else:
+            print("______________________________")
+            for elemento in automato:
+                if elemento[0] != "-":
+                    print(elemento)
+            # print("\nRemovendo estados vazios...")
+            print("\n\n\n" + descricao)
+            mostraoriginal(cabecalho, original)
+            print("\n\n-----AUTOMATO FINAL-----\n")
+            for elemento in cabecalho:
+                print("  " + elemento, end="")
+            print("\n______________________________\n")
+            automato = eliminavazio(automato)
+            automato = eliminanaoexistente(automato)
+            for elemento in automato:
+                if elemento[0] != "-":
+                    print(elemento)
             break
-    try:
-        arquivo = open(nome, "r")
-        linhas = arquivo.readlines()
-        descricao = linhas[0]
-        linhas.pop(0)
-        cabecalho = linhas[0]
-        linhas.pop(0)
-        original = []
-        print("\n\n\n__Eliminando estados incalcançaveis__\n")
-        newautomato = eliminainalcancaveis(linhas)
-        for elemento in linhas:
-            original.append(elemento.split())
-        for elemento in newautomato:
-            if elemento[0] != '-':
-                print(elemento)
-        automato = eliminaMortos(newautomato)
-        print("\n\n__Automato com os estados mortos removidos__\n")
-        for elemento in cabecalho:
-            print("  " + elemento + "  ", end="")
-        print("")
-        print("______________________________")
-        for elemento in automato:
-            if elemento[0] != "-":
-                print(elemento)
-        # print("\nRemovendo estados vazios...")
-        print("\n\n\n" + descricao)
-        mostraoriginal(cabecalho,original)
-        print("\n\n-----AUTOMATO FINAL-----\n")
-        for elemento in cabecalho:
-            print("  " + elemento, end="")
-        print("\n______________________________\n")
-        automato = eliminavazio(automato)
-        automato = eliminanaoexistente(automato)
-        for elemento in automato:
-            if elemento[0] != "-":
-                print(elemento)
-
-    except ValueError:
-        print("Nome do arquivo ou formato incorreto,"
-              " rode o programa e tente novamente...")
+        except:
+            print("Nome do arquivo ou formato incorreto,"
+                  " tente novamente...")
+            continue
 
 if __name__ == '__main__':
     print("O programa já conta com 5 exemplos camados aut1, aut2, aut3, aut4, aut5.")
