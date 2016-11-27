@@ -1,7 +1,6 @@
-- a b
-*->A= G B
-B F E
-C C G
-E E A
-F B C
-*G G F
+Neste caso o estado q4 é um estado morto e deve ser eliminado. O estado q3 mesmo sendo improdutivo continua por ser final.
+- 0 1
+->q1 q2 q4
+q2 q4 q3
+*q3 q4 q4
+q4 q4 q4

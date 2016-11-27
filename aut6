@@ -1,9 +1,10 @@
-- a b
-*->A= G B
-B F E
-C C G
-*D A H
-E E E
-F B C
-*G G F
-H H D
+Neste caso o automato é maior e E é morto, D e H inalcançaveis.
+- a b c
+*->A= G B B
+B F E A
+C C G C
+*D A H D
+E E E E
+F B C F
+*G G F A
+H H D D

@@ -2,14 +2,30 @@ from modulos import *
 
 
 def main():
-    nome = input("Nome do arquivo com o AFD: ")
+    nome = ""
+    while True:
+        nome = input("Nome do arquivo com o AFD ou digite ajuda para saber como usar: ")
+        if nome.lower() == "ajuda":
+            arq = open("Como usar", "r")
+            linhas = arq.readlines()
+            print("\n")
+            for linha in linhas:
+                print(linha)
+            print("")
+        else:
+            break
     try:
         arquivo = open(nome, "r")
         linhas = arquivo.readlines()
+        descricao = linhas[0]
+        linhas.pop(0)
         cabecalho = linhas[0]
         linhas.pop(0)
-        print("\n\n\n__Eliminando estados incalcansaveis__\n")
-        newautomato = eliminainalcansaveis(linhas)
+        original = []
+        print("\n\n\n__Eliminando estados incalcançaveis__\n")
+        newautomato = eliminainalcancaveis(linhas)
+        for elemento in linhas:
+            original.append(elemento.split())
         for elemento in newautomato:
             if elemento[0] != '-':
                 print(elemento)
@@ -22,23 +38,19 @@ def main():
         for elemento in automato:
             if elemento[0] != "-":
                 print(elemento)
-        print("\nRemovendo estados vazios...")
+        # print("\nRemovendo estados vazios...")
+        print("\n\n\n" + descricao)
+        mostraoriginal(cabecalho,original)
         print("\n\n-----AUTOMATO FINAL-----\n")
         for elemento in cabecalho:
             print("  " + elemento, end="")
         print("\n______________________________\n")
         automato = eliminavazio(automato)
         automato = eliminanaoexistente(automato)
-        # for i in range(len(automato)):
-        #     if automato[i][0] == "-":
-        #         continue
-        #     else:
-        #         for j in range(len(automato[i])):
-        #             print(automato[i][j], end="  ")
-        #         print("")
         for elemento in automato:
             if elemento[0] != "-":
                 print(elemento)
+
     except ValueError:
         print("Nome do arquivo ou formato incorreto,"
               " rode o programa e tente novamente...")

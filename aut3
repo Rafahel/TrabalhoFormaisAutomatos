@@ -1,9 +1,8 @@
+Neste caso o estado q5 é um estado morto, sendo assim deve ser eliminado e q4 é inalcaçavel.
 - a b
-*->A= G B
-B E E
-C C G
-*D A H
-E E E
-F B C
-*G G F
-H H H
+->q0 q1 q5
+q1 # q2
+*q2 q3 q2
+*q3 q3 q3
+q4 q4 q1
+q5 q5 q5

@@ -21,12 +21,12 @@ def eliminaMortos(automato):
 def eliminavazio(automato):
     c = 0
     for i in range(len(automato)):
-        # print(automato[i][0])
+        c = 0
         for j in range(1, len(automato[i])):
             # print(automato[i][j])
             if automato[i][j] == '-':
                 c += 1
-            if c == 2:
+            if c == 2 and "*" not in automato[i][0]:
                 c = 0
                 automato[i][0] = "-"
     # for elemento in automato:
@@ -34,9 +34,9 @@ def eliminavazio(automato):
     return automato
 
 
-def eliminainalcansaveis(automato):
+def eliminainalcancaveis(automato):
     automatoaux = []
-    alcansados = []
+    alcancados = []
     for elemento in automato:
         automatoaux.append(elemento.split())
     # print(automatoaux)
@@ -44,26 +44,26 @@ def eliminainalcansaveis(automato):
         for transicao in elemento:
             # print(transicao)
             if "->" in elemento[0]:
-                alcansados.append(transicao)
-    if len(alcansados) > 0:
-        alcansados.pop(0)
-    # print(alcansados)
-    for tr in alcansados:
+                alcancados.append(transicao)
+    if len(alcancados) > 0:
+        alcancados.pop(0)
+    # print(alcancados)
+    for tr in alcancados:
         for elemento in automatoaux:
             if tr in elemento[0]:
                 for i in range(1, len(elemento)):
                     # print(elemento[i])
-                    if elemento[i] not in alcansados:
-                        alcansados.append(elemento[i])
-    alcansados.append(automatoaux[0][0])
-    for i in range(len(alcansados)):
-        alcansados.append("*"+alcansados[i])
-        alcansados.append("->" + alcansados[i])
-        alcansados.append("*->" + alcansados[i])
-    # print(alcansados)
+                    if elemento[i] not in alcancados:
+                        alcancados.append(elemento[i])
+    alcancados.append(automatoaux[0][0])
+    for i in range(len(alcancados)):
+        alcancados.append("*"+alcancados[i])
+        alcancados.append("->" + alcancados[i])
+        alcancados.append("*->" + alcancados[i])
+    # print(alcancados)
     for i in range(len(automatoaux)):
         # print(automatoaux[i][0])
-        if automatoaux[i][0] not in alcansados:
+        if automatoaux[i][0] not in alcancados:
             automatoaux[i][0] = "-"
 
     # for elemento in automatoaux:
@@ -77,17 +77,30 @@ def eliminanaoexistente(automato):
         if elemento[0] != "-":
             existe.append(elemento[0])
 
-    for i in range(len(existe)):
-        if "*" in existe[i]:
-            existe.append(existe[i].replace("*", ""))
-    print(existe)
+    for j in range(2):
+        for i in range(len(existe)):
+            if "*" in existe[i]:
+                existe.append(existe[i].replace("*", ""))
+            if "->" in existe[i]:
+                existe.append(existe[i].replace("->", ""))
+            if "*->" in existe[i]:
+                existe.append(existe[i].replace("*->", ""))
+            if "=" in existe[i]:
+                existe.append(existe[i].replace("=", ""))
+    # print(existe)
     for i in range(len(automato)):
         for j in range(len(automato[i])):
             if automato[i][j] not in existe:
                 automato[i][j] = "-"
     return automato
 
-
+def mostraoriginal(cabecalho, original):
+    print("\n\n-----AUTOMATO ORIGINAL-----\n")
+    for elemento in cabecalho:
+        print("  " + elemento, end="")
+    print("\n______________________________\n")
+    for elemento in original:
+        print(elemento)
 
 if __name__ == '__main__':
     try:

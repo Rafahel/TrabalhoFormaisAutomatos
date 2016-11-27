@@ -1,10 +1,7 @@
-- a b
-*->A= G B
-B E E
-C C G
-*D A H
-E E A
-F B C
-*G G F
-H H H
-Y A D
+Neste caso o estado q5 é um estado morto e deve ser eliminado.
+- 0 1
+->q1 q2 q5
+q2 q5 q3
+q3 q1 q4
+*q4 q4 q4
+q5 q5 q5

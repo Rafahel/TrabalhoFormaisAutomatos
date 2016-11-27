@@ -1,9 +1,10 @@
+Este é o exemplo b dado na aula, neste caso temos dois estados inalcaçaveis, sendo eles o D e o H que devem ser removidos
 - a b
 *->A= G B
-B E E
+B F E
 C C G
 *D A H
-E E E
+E E A
 F B C
 *G G F
 H H D
