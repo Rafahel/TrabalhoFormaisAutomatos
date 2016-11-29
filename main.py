@@ -1,5 +1,5 @@
 from modulos import *
-
+import os
 
 def main():
     while True:
@@ -29,6 +29,7 @@ def main():
                 if elemento[0] != "-":
                     print(elemento)
             # print("\nRemovendo estados vazios...")
+            os.system("cls")
             print("\n\n\n" + descricao)
             mostraoriginal(cabecalho, original)
             print("\n\n-----AUTOMATO FINAL-----\n")
@@ -41,10 +42,12 @@ def main():
                 if elemento[0] != "-":
                     print(elemento)
             break
-        except:
+        except ValueError:
             print("Nome do arquivo ou formato incorreto,"
                   " tente novamente...")
             continue
+    print("\n")
+    os.system("pause")
 
 if __name__ == '__main__':
     print("O programa já conta com 5 exemplos camados aut1, aut2, aut3, aut4, aut5.")
